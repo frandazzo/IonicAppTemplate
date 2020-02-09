@@ -1,23 +1,53 @@
 import { Injectable } from '@angular/core';
+import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
+import {UserModel} from './user.model';
+import {HttpClient} from '@angular/common/http';
+import {catchError, map, tap} from 'rxjs/operators';
+
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
+  private loggedUserSubject  = new BehaviorSubject<UserModel>(null);
+
+  get loggedUser(): Observable<UserModel> {
+    return this.loggedUserSubject.asObservable();
+  }
+  constructor(private http: HttpClient) { }
 
   get IsAuthenticated() {
-    return this.isAuthenticated;
+    return this.loggedUser.pipe(
+        map(data => !!data)
+    );
   }
 
-  private isAuthenticated = false;
+
 
   logout() {
-    this.isAuthenticated = false;
+    this.loggedUserSubject.next(null);
   }
 
   login() {
-    this.isAuthenticated = true;
+    const formData = new FormData();
+    formData.append('mail', 'Segretario_uilp' );
+    formData.append('password', 'segretario');
+    return this.http.post<any>(environment.serverUrl + 'auth/remotelogin', formData).pipe(
+        map(data => {
+          const error = data.error;
+          if (error === false) {
+            return data.value;
+          }
+          throw new Error('Error retrieving data!');
+        } ),
+        tap(data => {
+            const l: UserModel = data;
+            this.loggedUserSubject.next(l);
+        }),
+        catchError(err => of(err))
+    );
+
   }
 }
