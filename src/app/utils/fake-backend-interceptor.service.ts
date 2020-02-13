@@ -13,6 +13,10 @@ export class FakeBackendInterceptorService implements HttpInterceptor{
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     console.log('Intercepted httpCall' + req.url);
 
+    if (this.fakeDb.tryMatchPath(req)) {
+      const result = this.fakeDb.executeRequestOnFakeDb(req);
+      return of(new HttpResponse({ status: 200, body: result }));
+    }
     // for (const element of this.fakeDb.urls) {
     //   if (req.url.indexOf(element) > -1) {
     //     console.log('Loaded from fake db : ' + element);

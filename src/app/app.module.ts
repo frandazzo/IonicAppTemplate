@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FakeBackendInterceptorService} from './utils/fake-backend-interceptor.service';
-import {FakeBackendInitializerService, initializationFactory} from './utils/fake-backend-initializer.service';
+import {FakeBackendInitializerService, initializationFactory} from './fake-backend-initializer.service';
 import {FakeDbServiceService} from './utils/fake-db-service.service';
 
 

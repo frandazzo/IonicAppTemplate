@@ -48,6 +48,12 @@ export class AuthPage implements OnInit {
                     this.isLoading = false;
                     loadingEl.dismiss();
                     this.router.navigateByUrl('/my-data/tabs/anag');
+                }, (error) => {
+                    this.isLoading = false;
+                    loadingEl.dismiss();
+                    console.error(error);
+
+
                 });
             });
     }
