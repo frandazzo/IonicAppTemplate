@@ -6,6 +6,7 @@ import {catchError, map, take, tap} from 'rxjs/operators';
 
 import {environment} from '../../environments/environment';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -30,19 +31,19 @@ export class AuthService {
     this.loggedUserSubject.next(null);
   }
 
-  login() {
+  login(mail: string, password: string) {
     const formData = new FormData();
-    formData.append('mail', 'Segretario_uilp' );
-    formData.append('password', 'segretario');
+    formData.append('mail', mail );
+    formData.append('password', password);
     return this.http.post<any>(environment.serverUrl + 'auth/remotelogin', formData).pipe(
-        take(1),
         map(data => {
           const error = data.error;
           if (error === false) {
             return data.value;
           }
+
           throw new Error(data.message);
-        } ),
+        }),
         tap(data => {
             const l: UserModel = data;
             this.loggedUserSubject.next(l);

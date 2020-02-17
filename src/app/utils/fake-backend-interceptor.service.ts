@@ -17,13 +17,6 @@ export class FakeBackendInterceptorService implements HttpInterceptor{
       const result = this.fakeDb.executeRequestOnFakeDb(req);
       return of(new HttpResponse({ status: 200, body: result }));
     }
-    // for (const element of this.fakeDb.urls) {
-    //   if (req.url.indexOf(element) > -1) {
-    //     console.log('Loaded from fake db : ' + element);
-    //     return of(new HttpResponse({ status: 200, body: ((this.fakeDb) as any).default }));
-    //   }
-    // }
-
 
     return next.handle(req);
   }
