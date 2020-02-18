@@ -12,6 +12,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FakeBackendInterceptorService} from './utils/fake-backend-interceptor.service';
 import {FakeBackendInitializerService, initializationFactory} from './fake-backend-initializer.service';
 import {FakeDbServiceService} from './utils/fake-db-service.service';
+import {HttpInterceptorService} from './auth/http-interceptor.service';
 
 
 
@@ -24,6 +25,11 @@ import {FakeDbServiceService} from './utils/fake-db-service.service';
   providers: [
     StatusBar,
     SplashScreen,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi: true
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: FakeBackendInterceptorService,

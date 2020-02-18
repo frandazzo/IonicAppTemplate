@@ -54,7 +54,6 @@ export class AuthPage implements OnInit {
             .then(loadingEl => {
                 loadingElement = loadingEl;
                 loadingEl.present();
-
                 return self.authService.login(email, password).toPromise();
             })
             .then(loginData => {

@@ -1,5 +1,7 @@
 {
   "name": "uilsgk",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }
