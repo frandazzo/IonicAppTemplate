@@ -13,7 +13,7 @@ import {FakeBackendInterceptorService} from './utils/fake-backend-interceptor.se
 import {FakeBackendInitializerService, initializationFactory} from './fake-backend-initializer.service';
 import {FakeDbServiceService} from './utils/fake-db-service.service';
 import {HttpInterceptorService} from './auth/http-interceptor.service';
-
+import { FileOpener } from '@ionic-native/file-opener/ngx';
 
 
 
@@ -23,6 +23,7 @@ import {HttpInterceptorService} from './auth/http-interceptor.service';
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
   providers: [
+    FileOpener,
     StatusBar,
     SplashScreen,
     {

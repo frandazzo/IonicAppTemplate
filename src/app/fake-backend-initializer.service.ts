@@ -66,7 +66,7 @@ export class FakeBackendInitializerService {
                   }
 
                   return {
-                    token: 'iofiowehfowehfeoif',
+                    token: '',
                     company: 'company',
                     mail: 'fg.randazzo@hotmail.it',
                     name: 'Francesco',

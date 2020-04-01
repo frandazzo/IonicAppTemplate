@@ -24,6 +24,10 @@ const routes: Routes = [
     loadChildren: () => import('./my-communications/my-communications.module').then( m => m.MyCommunicationsPageModule),
     canLoad : [AuthGuard]
   },
+  {
+    path: 'testrouting',
+    loadChildren: () => import('./testrouting/testrouting.module').then( m => m.TestroutingPageModule)
+  },
 ];
 
 @NgModule({
